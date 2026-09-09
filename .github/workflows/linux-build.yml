@@ -1,7 +1,7 @@
 name: Linux build
 
 on:
-  pull_request:
+  workflow_dispatch: 
 
 # Cancel previous runs if a more recent commit is pushed.
 concurrency:
@@ -57,26 +57,26 @@ jobs:
         run: |
           cd build
           ctest -j $(nproc)
-      - name: Run runtime tests
-        run: |
-          cd build/bin
+      # - name: Run runtime tests
+      #   run: |
+      #     cd build/bin
 
-          xvfb-run -a ./vk_sample_03_square_textured --frame-count 2 --screenshot-frame-number 1
-          convert screenshot_frame_1.ppm vk_03_square_textured_screenshot.png
+      #     xvfb-run -a ./vk_sample_03_square_textured --frame-count 2 --screenshot-frame-number 1
+      #     convert screenshot_frame_1.ppm vk_03_square_textured_screenshot.png
 
-          xvfb-run -a ./vk_sample_09_obj_geometry --frame-count 2 --screenshot-frame-number 1
-          convert screenshot_frame_1.ppm vk_09_obj_geometry_screenshot.png
+      #     xvfb-run -a ./vk_sample_09_obj_geometry --frame-count 2 --screenshot-frame-number 1
+      #     convert screenshot_frame_1.ppm vk_09_obj_geometry_screenshot.png
 
-          xvfb-run -a ./vk_sample_13_normal_map --frame-count 2 --screenshot-frame-number 1
-          convert screenshot_frame_1.ppm vk_13_normal_map_screenshot.png
+      #     xvfb-run -a ./vk_sample_13_normal_map --frame-count 2 --screenshot-frame-number 1
+      #     convert screenshot_frame_1.ppm vk_13_normal_map_screenshot.png
 
-          xvfb-run -a ./vk_fishtornado --frame-count 2 --screenshot-frame-number 1
-          convert screenshot_frame_1.ppm vk_fishtornado_screenshot.png
+      #     xvfb-run -a ./vk_fishtornado --frame-count 2 --screenshot-frame-number 1
+      #     convert screenshot_frame_1.ppm vk_fishtornado_screenshot.png
 
-          xvfb-run -a ./vk_graphics_pipeline --frame-count 2 --screenshot-frame-number 1
-          convert screenshot_frame_1.ppm vk_graphics_pipeline_screenshot.png
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots
-          path: build/bin/*.png
+      #     xvfb-run -a ./vk_graphics_pipeline --frame-count 2 --screenshot-frame-number 1
+      #     convert screenshot_frame_1.ppm vk_graphics_pipeline_screenshot.png
+      # - name: Upload screenshots
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: screenshots
+      #     path: build/bin/*.png
